@@ -1,4 +1,6 @@
-.table{
+// css for table Component
+
+.todo-table{
     background-color: $table-color;
     width:800px;
     // height:500px;
@@ -32,7 +34,8 @@
 }
 .add-board{
     padding: 15px;
-     background-color: #f2d4aa;
+    background-color: #f2d4aa;
+    cursor: pointer;
 }
 
 .add-board p{
@@ -107,4 +110,12 @@
     color: #700c54;
     font-size: 17px;
     // font-weight: 700;
+}
+
+.table-middle-bar{
+    cursor: pointer;
+}
+
+.selectors i{
+    margin-right: 7px !important;
 }

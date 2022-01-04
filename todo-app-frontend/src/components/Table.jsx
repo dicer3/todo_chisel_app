@@ -1,25 +1,50 @@
-import React from 'react'
-import { Button } from 'semantic-ui-react'
-import { Icon } from 'semantic-ui-react'
+import React, { useState } from 'react'
+import { Icon, Checkbox } from 'semantic-ui-react'
+import AddModal from './AddModal';
+import DeleteModal from './DeleteModal';
+
 function Table() {
     const boards = ["board1","board2","board3"]
     const pendingTodos = ["pending 1","pending 2"];
-    const completedTodos = ["completed todos"]
+    const completedTodos = ["completed todos"];
+
+
+    const [showAddModel,setAddShowModel] = useState(false);
+    const [toggleAddShowModel,setToggleAddShowModel] = useState(false);
+    const [addModalType,setAddModalType] = useState("");
+    const [showDeleteModel,setDeleteShowModel] = useState(false);
+    const [toggleDeleteShowModel,setDeleteAddShowModel] = useState(false);
+    const [deleteModalType,setDeleteModalType] = useState("");
+
+
+    const openAddModal=(modalType)=>{
+        setAddShowModel(true);
+        setToggleAddShowModel(!toggleAddShowModel);
+        setAddModalType(modalType)
+    }
+
+    const openDeleteModal=(modalType)=>{
+        setDeleteShowModel(true);
+        setDeleteAddShowModel(!toggleDeleteShowModel);
+        setDeleteModalType(modalType)
+    }
+
     return (
-        <div className="table">
+        <>
+        <div className="todo-table">
             <div className="table-upper-bar">
                 <div className="board-headings">
                 {boards.map(board => <div className="board">
                    <div className="board-name">{board}</div> 
-                    <Icon link name='close' />
+                    <Icon link name='close' onClick={()=>openDeleteModal("Board")}/>
                     </div> )}
                 </div>
-                <div className="add-board">
+                <div className="add-board" onClick={()=>openAddModal("Board")}>
                     <i className="plus square icon"></i>
                     <p>Add Board</p>
                 </div>
             </div>
-            <div className="table-middle-bar">
+            <div className="table-middle-bar"  onClick={()=>openAddModal("Todo")}>
                 <span>Add Todo</span>
                 <i className="plus square icon"></i>
             </div>
@@ -31,7 +56,10 @@ function Table() {
                     {pendingTodos.map(todo=>
                         <div className="todo">
                             <div className="todo-name">{todo}</div>
-                            <Icon link name='close' />
+                            <div className="selectors">
+                                <Icon link name='close' onClick={()=>openDeleteModal("Todo")}/>
+                                <Checkbox checked={true} />
+                            </div>
                         </div>
                         )}
                 </div>
@@ -40,14 +68,16 @@ function Table() {
                         Completed Todos
                     </div>   
                     {completedTodos.map(todo=>
-                        <div className="todo">
+                        <div className="todo" style={{"padding": "22.2px"}}>
                             <div className="todo-name">{todo}</div>
-                            <Icon link name='close' />
                         </div>
                         )}
                 </div>
             </div>
         </div>
+        <AddModal showModel={showAddModel} toggleShowModel={toggleAddShowModel} modalType={addModalType} />
+        <DeleteModal showModel={showDeleteModel} toggleShowModel={toggleDeleteShowModel} modalType={deleteModalType} />
+        </>
     )
 }
 

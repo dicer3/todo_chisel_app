@@ -1,0 +1,44 @@
+.modal{
+    height: max-content ;
+    width: 500px !important;
+    margin: 75px 30% !important;
+}
+
+
+.ui.modal>.content p{
+    text-align: center;
+    font-size: 22px;
+    color: #355e53;
+    margin:10px 0;
+}
+
+.ui.modal>.content input {
+    width:100%;
+    padding: 5px;
+    border-radius: 3px;
+    border: 2px solid grey ;
+}
+
+.ui.modal>.content button {
+    background-color: #7ba8b0;
+    padding: 5px 12px;
+    border: none;
+    border-radius: 4px;
+    margin: 0 auto;
+    color: white;
+    display: block;
+    margin-top: 15px;
+}
+
+.ui.modal>.content .cross-button{
+    font-size: 25px;
+    float: right;
+    cursor: pointer;
+}
+
+.ui.modal>.content .error {
+    color: #872033;
+    font-size: 13px;
+    margin: 4px 0;
+    text-align: center;
+}
