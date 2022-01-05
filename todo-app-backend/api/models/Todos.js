@@ -25,8 +25,8 @@ module.exports = {
 
   },
   tableName:"todos",
-  attributes: {    
-    todoId: {
+  attributes: {   
+    id: {
       type:"string",
       unique:true,
       required:true

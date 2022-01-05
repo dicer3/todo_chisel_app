@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Icon, Checkbox } from 'semantic-ui-react'
 import AddModal from './AddModal';
 import DeleteModal from './DeleteModal';
+import { getBoards } from '../api'
 
+const BOARD_CONSTANT = "Board";
+const TODO_CONSTANT = "Todo";
 function Table() {
     const boards = ["board1","board2","board3"]
     const pendingTodos = ["pending 1","pending 2"];
@@ -15,6 +18,10 @@ function Table() {
     const [showDeleteModel,setDeleteShowModel] = useState(false);
     const [toggleDeleteShowModel,setDeleteAddShowModel] = useState(false);
     const [deleteModalType,setDeleteModalType] = useState("");
+
+    useEffect(async()=>{
+        await getBoards()
+    },[])
 
 
     const openAddModal=(modalType)=>{
@@ -36,15 +43,15 @@ function Table() {
                 <div className="board-headings">
                 {boards.map(board => <div className="board">
                    <div className="board-name">{board}</div> 
-                    <Icon link name='close' onClick={()=>openDeleteModal("Board")}/>
+                    <Icon link name='close' onClick={()=>openDeleteModal(BOARD_CONSTANT)}/>
                     </div> )}
                 </div>
-                <div className="add-board" onClick={()=>openAddModal("Board")}>
+                <div className="add-board" onClick={()=>openAddModal(BOARD_CONSTANT)}>
                     <i className="plus square icon"></i>
                     <p>Add Board</p>
                 </div>
             </div>
-            <div className="table-middle-bar"  onClick={()=>openAddModal("Todo")}>
+            <div className="table-middle-bar"  onClick={()=>openAddModal(TODO_CONSTANT)}>
                 <span>Add Todo</span>
                 <i className="plus square icon"></i>
             </div>
@@ -57,7 +64,7 @@ function Table() {
                         <div className="todo">
                             <div className="todo-name">{todo}</div>
                             <div className="selectors">
-                                <Icon link name='close' onClick={()=>openDeleteModal("Todo")}/>
+                                <Icon link name='close' onClick={()=>openDeleteModal(TODO_CONSTANT)}/>
                                 <Checkbox checked={true} />
                             </div>
                         </div>

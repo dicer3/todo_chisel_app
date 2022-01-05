@@ -7,15 +7,22 @@
 
 module.exports = {
   
+        getTodo:async()=>{
+            return await Todos.find();
+        },
         addTodo:async(req,res)=>{
-            const todo = {
-                todoId:req.body.todoId,
-                boardName:req.body.todoName,
-                boardId:req.body.boardId,
-                completed:req.body.completed
+            try {
+                const todo = {
+                    id:req.body.todoId,
+                    todoName:req.body.todoName,
+                    boardId:req.body.boardId,
+                    completed:req.body.completed
+                }
+                await Todos.create(todo);
+                return res.status(200).json({message:"created todos"})
+            } catch(e) {
+                res.status(500).json(e.message)
             }
-            const todos = await Todos.create(todo);
-            return res.status(200).json(todos)
         },
         removeTodo:async(req,res)=>{
             const todoId = req.params.todoId

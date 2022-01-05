@@ -22,7 +22,11 @@ module.exports.routes = {
   '/': { view: 'pages/homepage' },
 
   'GET /api/boards':'BoardsController.getBoards',
-  'POST /api/boards':'BoardsController.createBoards'
+  'POST /api/boards':'BoardsController.createBoards',
+  'POST /api/todos':'TodosController.addTodo',
+
+
+
 
 
   /***************************************************************************

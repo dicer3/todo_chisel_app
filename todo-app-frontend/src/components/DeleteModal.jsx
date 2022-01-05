@@ -21,7 +21,7 @@ function DeleteModal({showModel,toggleShowModel,modalType}) {
             <p className="add-title">are you sure you want to delete current {modalType}</p>
             <div className="d-flex ">
                 <button>Yes</button>
-                <button>No</button>
+                <button onClick={handleClose}>No</button>
             </div>
         </Modal.Content>
     </Modal>

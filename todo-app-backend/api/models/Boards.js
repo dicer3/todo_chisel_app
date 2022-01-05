@@ -8,9 +8,7 @@
 module.exports = {
 
   tableName:"boards",
-  primaryKey:"id",
   attributes: {
-     
     id: {
       type:"string",
       unique:true,

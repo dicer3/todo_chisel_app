@@ -12,17 +12,21 @@ module.exports = {
   
     getBoards:async(req,res)=>{
        const boards = await Boards.find();
-       return res.status(200).json(boards)
+       const todos = await TodosController.getTodo();
+        return res.status(200).json({boards,todos})
     },
     createBoards:async(req,res)=>{
-        const board = {
-            id:req.body.id,
-            boardName:req.body.boardName
+        try {
+            const board = {
+                id:req.body.boardId,
+                boardName:req.body.boardName
+            }
+            await Boards.create(board);
+            await TodosController.addTodo(req,res)
+            return res.status(200).json({"message":"Created Board"})
+        } catch(e) {
+            res.status(500).json({"message":e.message})
         }
-        const boards = await Boards.create(board);
-        const todos = TodosController.addTodo(req)
-        console.log("todos..",todos)
-        return res.status(200).json(boards)
     },
     deleteBoard:async(req,res)=>{
         const boardId = req.params.boardId
