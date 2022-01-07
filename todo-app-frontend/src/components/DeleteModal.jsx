@@ -12,18 +12,18 @@ function DeleteModal({showModel,toggleShowModel,modalType,deletedId}) {
     const handleClose = () => setShow(false);
     const handleOpen = () => setShow(true);
 
-    useEffect(() => {
+    useEffect(() => { // displaying model using prop hooks
         if(showModel)
           setShow(true);
       }, [toggleShowModel])
     
     const actionModal=async()=>{
-        if(modalType==="Board") {
-            await deleteBoard(deletedId)
-            dispatch(boardActions.clearBoards())
+        if(modalType==="Board") { 
+            await deleteBoard(deletedId)  // caling deleting board api
+            dispatch(boardActions.clearBoards()) // making loading false to call api again 
         }   else if(modalType==="Todo") {
-            await deleteTodo(deletedId)
-            dispatch(boardActions.clearBoards())
+            await deleteTodo(deletedId) // caling deleting todo api
+            dispatch(boardActions.clearBoards()) // making loading false to call api again 
         }
     }
 

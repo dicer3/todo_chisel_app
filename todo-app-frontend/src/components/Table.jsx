@@ -12,24 +12,24 @@ const BOARD_CONSTANT = "Board";
 const TODO_CONSTANT = "Todo";
 function Table() {
     const dispatch = useDispatch();
-    const {boardsAndTodos} = useSelector(({boardsAndTodos}) => boardsAndTodos)
+    const {boardsAndTodos} = useSelector(({boardsAndTodos}) => boardsAndTodos) // getting boardAndTodos from Redux
 
     const {boards,todos} = boardsAndTodos
 
-    const [showAddModel,setAddShowModel] = useState(false);
-    const [toggleAddShowModel,setToggleAddShowModel] = useState(false);
-    const [addModalType,setAddModalType] = useState("");
+    const [showAddModel,setAddShowModel] = useState(false); 
+    const [toggleAddShowModel,setToggleAddShowModel] = useState(false); // hooks for opening/closing Add Model , Add Model will used for adding or deleting todos or boards
+    const [addModalType,setAddModalType] = useState(""); // Modal Type of Add Modal , can be Board or Todo
     const [showDeleteModel,setDeleteShowModel] = useState(false);
-    const [toggleDeleteShowModel,setDeleteAddShowModel] = useState(false);
-    const [deleteModalType,setDeleteModalType] = useState("");
-    const [deletedId,setDeletedId] = useState("");
-    const boardsExist = Object.keys(boards).length > 0;
+    const [toggleDeleteShowModel,setDeleteAddShowModel] = useState(false); // hooks for opening/closing Delete Model , Delete Model will used for adding or deleting todos or boards
+    const [deleteModalType,setDeleteModalType] = useState(""); // Modal Type of Delete Modal , can be Board or Todo
+    const [deletedId,setDeletedId] = useState(""); // deletedId for current deleting board or todo
+    const boardsExist = Object.keys(boards).length > 0; // checking if any board exist
 
-    let defSelectedBoard,defSepPendingTodos=[],defSepCompletedTodos=[];
+    let defSelectedBoard,defSepPendingTodos=[],defSepCompletedTodos=[]; // default selectedBoard , default Pending Todos and default Completed Todos
     defSelectedBoard = boardsExist ? Object.keys(boards)[0] : "";
-    const [selectedBoard,setSelectedBoard] = useState(defSelectedBoard)
+    const [selectedBoard,setSelectedBoard] = useState(defSelectedBoard) // selectedd Board , currently selected Board
     if(boardsExist) {
-        const {sepPendingTodos,sepCompletedTodos} = sepratePendingCompletedTodos(todos[selectedBoard])
+        const {sepPendingTodos,sepCompletedTodos} = sepratePendingCompletedTodos(todos[selectedBoard]) // seprate todos into pending and completed
         defSepPendingTodos = sepPendingTodos;
         defSepCompletedTodos = sepCompletedTodos;
     }
@@ -38,26 +38,26 @@ function Table() {
 
     useEffect(() => {
         if(selectedBoard) {
-            const {sepPendingTodos,sepCompletedTodos} = sepratePendingCompletedTodos(todos[selectedBoard])
+            const {sepPendingTodos,sepCompletedTodos} = sepratePendingCompletedTodos(todos[selectedBoard]) // setting PendingTodos and CompletedTodos on board change
             setPendingTodos(sepPendingTodos)
             setCompletedTodos(sepCompletedTodos)
         }
     }, [selectedBoard])
 
 
-    const openAddModal=(modalType)=>{
+    const openAddModal=(modalType)=>{ // opening Add Modal and setting up hooks
         setAddShowModel(true);
         setToggleAddShowModel(!toggleAddShowModel);
         setAddModalType(modalType)
     }
 
-    const openDeleteModal=(modalType)=>{
+    const openDeleteModal=(modalType)=>{ // opening Delete Modal and setting up hooks
         setDeleteShowModel(true);
         setDeleteAddShowModel(!toggleDeleteShowModel);
         setDeleteModalType(modalType)
     }
 
-    const todoToComplete=async(todoId)=>{
+    const todoToComplete=async(todoId)=>{ // making a Todo Complete
         await makeTodoComplete(todoId);
         dispatch(boardActions.clearBoards())
     }

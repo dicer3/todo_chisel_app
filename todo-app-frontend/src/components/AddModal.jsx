@@ -25,13 +25,13 @@ function AddModal({showModel,toggleShowModel,modalType,selectedBoard}) {
         if(!boardName || !todoName) {
           setError("Kindly Fill All Particulars")
         }  
-        await createBoards({boardName,todoName});
-        dispatch(boardActions.clearBoards())
+        await createBoards({boardName,todoName}); // adding board to send api
+        dispatch(boardActions.clearBoards())  // making loading false to call api again
       } else {
         if(!todoName)
           setError("Kindly Fill All Particulars")
-        await createTodo({todoName,boardId:selectedBoard})
-        dispatch(boardActions.clearBoards())
+        await createTodo({todoName,boardId:selectedBoard}) // adding todo to send api
+        dispatch(boardActions.clearBoards()) // making loading false to call api again
       }
          
     }

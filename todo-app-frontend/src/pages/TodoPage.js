@@ -5,12 +5,13 @@ import Table from '../components/Table'
 import actions from '../store/actions'
 function TodoPage() {
     const dispatch = useDispatch();
-    const {loadedBoardsAndTodos} = useSelector(({boardsAndTodos}) => boardsAndTodos)
+    const {loadedBoardsAndTodos} = useSelector(({boardsAndTodos}) => boardsAndTodos) // fetching loading value from redux
     useEffect(() => {
-        dispatch(actions.getBoards());
+        dispatch(actions.getBoards()); // getting board again when loading value changes
     }, [loadedBoardsAndTodos])
     return <Dimmer active>
-        { loadedBoardsAndTodos ? <Table /> : <Loader /> }
+        {/* displaying loager or table according to loading value */}
+        { loadedBoardsAndTodos ? <Table /> : <Loader /> } 
     </Dimmer>
 }
 
