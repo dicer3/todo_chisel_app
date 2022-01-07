@@ -7,7 +7,6 @@
 
 const TodosController = require("./TodosController");
 
-//const Boards = require("../models/Boards")
 module.exports = {
   
     getBoards:async(req,res)=>{
@@ -30,7 +29,9 @@ module.exports = {
     },
     deleteBoard:async(req,res)=>{
         const boardId = req.params.boardId
-        Boards.destroy({boardId})
+        await Boards.destroy({id:boardId})
+        await TodosController.removeTodoUsingBoardId(boardId)
+        res.status(200).json({"message":"Board Deleted"})
     }
 
 };

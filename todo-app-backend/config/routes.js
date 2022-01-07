@@ -23,7 +23,10 @@ module.exports.routes = {
 
   'GET /api/boards':'BoardsController.getBoards',
   'POST /api/boards':'BoardsController.createBoards',
-  'POST /api/todos':'TodosController.addTodo',
+  'DELETE /api/boards/:boardId':'BoardsController.deleteBoard',
+  'POST /api/todo':'TodosController.addTodo',
+  'DELETE /api/todo/:todoId':'TodosController.removeTodoUsingTodoId',
+  'PUT /api/todo/:todoId':'TodosController.makeTodoComplete',
 
 
 

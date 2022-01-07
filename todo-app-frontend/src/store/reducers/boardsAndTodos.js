@@ -1,5 +1,5 @@
 const initialState = {
-    boardsandTodos: {},
+    boardsAndTodos: {},
     loadedBoardsAndTodos: false,
 };
 export default (state = initialState, action) => {
@@ -7,7 +7,7 @@ export default (state = initialState, action) => {
         case 'GET_BOARDS_AND_TODOS':
             return {
                 ...state,
-                boardsandTodos: action.payload,
+                boardsAndTodos: action.payload,
                 loadedBoardsAndTodos:true,
             }
         case 'CLEAR_BOARDS_AND_TODOS':

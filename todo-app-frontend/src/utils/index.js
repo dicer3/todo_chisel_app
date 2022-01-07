@@ -1,5 +1,4 @@
 export const formatBoardTodo=(boardsResponse)=>{
-    console.log("nire ",boardsResponse)
     const {boards,todos} = boardsResponse;
     
     let boardsObj={},todosObj={};
@@ -14,6 +13,17 @@ export const formatBoardTodo=(boardsResponse)=>{
         todosObj[key].push(todo);
     })
 
-    console.log("hi...",boardsObj,"...",todosObj)
     return {boards:boardsObj,todos:todosObj}
+}
+
+export const sepratePendingCompletedTodos=(todos)=>{
+
+    const pendingTodos=[],completedTodos=[];
+    todos.forEach((todo)=>{
+        if(todo["completed"])
+            completedTodos.push(todo)
+        else 
+            pendingTodos.push(todo)
+    })
+    return {sepPendingTodos:pendingTodos,sepCompletedTodos:completedTodos}
 }

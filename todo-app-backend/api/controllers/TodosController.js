@@ -16,7 +16,7 @@ module.exports = {
                     id:req.body.todoId,
                     todoName:req.body.todoName,
                     boardId:req.body.boardId,
-                    completed:req.body.completed
+                    completed:false,
                 }
                 await Todos.create(todo);
                 return res.status(200).json({message:"created todos"})
@@ -24,15 +24,20 @@ module.exports = {
                 res.status(500).json(e.message)
             }
         },
-        removeTodo:async(req,res)=>{
+        removeTodoUsingTodoId:async(req,res)=>{
             const todoId = req.params.todoId
-            const todos = await Todos.destroy({todoId})
+            const todos = await Todos.destroy({id:todoId})
             return res.status(200).json(todos)
+        },
+        removeTodoUsingBoardId:async(boardId)=>{
+            await Todos.destroy({boardId})
+            return "deleted"
         },
         makeTodoComplete:async(req,res)=>{
             const todoId = req.params.todoId
-            const todos = await Todos.update({completed:true}, {todoId});
+            const todos = await Todos.update({id:todoId},{completed:true});
             return res.status(200).json(todos)
-        }
+        },
+
 };
 

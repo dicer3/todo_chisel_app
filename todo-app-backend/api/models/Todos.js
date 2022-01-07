@@ -37,7 +37,6 @@ module.exports = {
     },
     boardId:{
       type:"string",
-      unique:true,
     },
     completed:{
       type:"boolean",
